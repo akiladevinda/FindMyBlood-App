@@ -1,5 +1,5 @@
 /**
- * EmergencyLK 
+ * FindMyBlood 
  * Button With Gradient Style
  */
 
@@ -20,7 +20,7 @@ export default class CustomButtonPrimary extends Component {
         return (
             <LinearGradient 
             start={{x: 0, y: 0.5}} end={{x: 1, y: 0.1}} 
-            colors={['#1E1E1E', '#823636', '#E44D4D']}  
+            colors={['#500B0B', '#A81643', '#FF217A']}  
             style={styles.bottonCotainer}>
             <TouchableOpacity onPress={this.props.onPress} style={styles.buttonContainer}>
             <Text style={styles.buttonText}>{this.props.title}</Text>

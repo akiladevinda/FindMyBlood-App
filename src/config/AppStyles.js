@@ -8,8 +8,8 @@ const AppStyles = {
     primaryFontBold:'Montserrat-Bold',
     primaryFontLight:'Montserrat-Light',
     primaryFontExtraLight:'Montserrat-ExtraLight',
-    primaryColor:'#E44D4D',
-    primaryColorDark:'#5A2C2C',
+    primaryColor:'#7C1027',
+    primaryColorDark:'#7C1027',
     colorWhite: '#ffffff',
     colorBlack:'#000000',
     colorGray:'#636363'
