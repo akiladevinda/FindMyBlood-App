@@ -10,12 +10,15 @@ const Assets = {
     HEADER_LOGO  : require('../assets/logo/logo.png'),
     LOGIN_LOGO  : require('../assets/login/login.png'),
     IC_BACKBTN_WHITE : require('../assets/header/back-arrow-white.png'),
+    IC_BACKBTN_RED : require('../assets/header/red-arrow.png'),
     IC_FULLNAME : require('../assets/auth/name.png'),
     IC_EMAIL : require('../assets/auth/email.png'),
     IC_NIC : require('../assets/auth/nic.png'),
     IC_PASSWORD : require('../assets/auth/password.png'),
     IC_ADDRESS : require('../assets/auth/address.png'),
     IC_NOTIFICATION : require('../assets/header/notifications.png'),
+    IC_MOBILE_NO : require('../assets/auth/mobile.png'),
+    IC_DATE:require('../assets/auth/date.png'),
 };
 
 

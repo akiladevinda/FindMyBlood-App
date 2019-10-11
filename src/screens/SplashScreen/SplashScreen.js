@@ -15,6 +15,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import Statusbar from '../../components/Statusbar/Statusbar';
 import Assets from '../../config/Assets';
 import Metrics from '../../config/Metrics';
+import MainScreen from '../Auth/MainScreen';
 
 export default class SplashScreen extends Component {
 
@@ -50,6 +51,12 @@ export default class SplashScreen extends Component {
     //         }
 
     //     })
+
+        setTimeout(() => {
+            this.props.navigation.navigate("MainScreen",{screen:MainScreen});
+        }, 1000);
+
+
     }
 
     componentWillUnmount(){

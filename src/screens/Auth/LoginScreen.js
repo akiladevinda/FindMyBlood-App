@@ -1,5 +1,5 @@
 /** 
- * EmergencyLK 
+ * FindMyBlood 
  * Login Screen of the Application
  */
 
@@ -11,7 +11,8 @@ import {
     ScrollView,
     Image,
     TextInput,
-    Alert
+    Alert,
+    BackHandler
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import LinearGradient from 'react-native-linear-gradient';
@@ -32,6 +33,14 @@ export default class LoginScreen extends Component {
             password:'',
             loading:false,
         }
+    }
+
+    componentDidMount(){
+        BackHandler.addEventListener('hardwareBackPress', this.backButtonOnPress);
+    }
+
+    componentWillUnmount(){
+        BackHandler.removeEventListener('hardwareBackPress', this.backButtonOnPress);
     }
 
     //On Press event for the back button 

@@ -20,6 +20,7 @@ import Assets from '../../config/Assets';
 import CustomButtonBorder from '../../components/CustomButton/CustomButtonBorder';
 import CustomButtonPrimary from '../../components/CustomButton/CustomButtonPrimary';
 import LoginScreen from './LoginScreen';
+import RegisterScreen from './RegisterScreen';
 
 export default class MainScreen extends Component {
 

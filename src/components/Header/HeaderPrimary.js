@@ -21,17 +21,14 @@ import Assets from '../../config/Assets';
 export default class HeaderPrimary extends Component {
     render() {
         return (
-            <LinearGradient 
-            start={{x: 0, y: 0.5}} end={{x: 1, y: 0.1}} 
-            colors={['#500B0B', '#A81643', '#FF217A']}   
-            style={styles.headerView}>
+            <View style={styles.headerView}>
             <View style={{flexDirection:'row'}}>
             <TouchableOpacity onPress={this.props.onPress}>
-            <Image source={Assets.IC_BACKBTN_WHITE} style={styles.backButton}/>
+            <Image source={Assets.IC_BACKBTN_RED} style={styles.backButton}/>
             </TouchableOpacity>
             <Text style={styles.headerTitle}>{this.props.title}</Text>
             </View>
-            </LinearGradient>
+            </View>
         );
     }
 }
@@ -40,7 +37,8 @@ export default class HeaderPrimary extends Component {
 const styles = StyleSheet.create({
     headerView:{
         width:Metrics.DEVICE_WIDTH,
-        height:Platform.OS === 'android' ? Metrics.DEVICE_HEIGHT/10 : Metrics.DEVICE_HEIGHT/8,
+        height:Platform.OS === 'android' ? Metrics.DEVICE_HEIGHT/10 : Metrics.DEVICE_HEIGHT/6,
+        backgroundColor:'transparent'
     },
     backButton:{
         width:40,
@@ -51,8 +49,8 @@ const styles = StyleSheet.create({
     headerTitle:{
         fontFamily:AppStyles.primaryFontBold,
         fontSize:20,
-        color:AppStyles.colorWhite,
-        marginTop:Platform.OS === 'android' ? Metrics.DEVICE_HEIGHT/30 : Metrics.DEVICE_HEIGHT/20,
+        color:AppStyles.colorBlack,
+        marginTop:Platform.OS === 'android' ? Metrics.DEVICE_HEIGHT/27 : Metrics.DEVICE_HEIGHT/20,
         marginLeft:8
     }
 });
