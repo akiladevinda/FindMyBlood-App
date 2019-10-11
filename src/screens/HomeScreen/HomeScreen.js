@@ -5,7 +5,7 @@ import {
     StyleSheet
 } from 'react-native';
 
-export default class componentName extends Component {
+export default class HomeScreen extends Component {
 
     constructor(props) {
         super(props);

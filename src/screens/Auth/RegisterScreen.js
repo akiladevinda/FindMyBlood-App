@@ -25,6 +25,7 @@ import CustomButtonPrimary from '../../components/CustomButton/CustomButtonPrima
 import Spinner from 'react-native-loading-spinner-overlay';
 import API from '../../config/API';
 import HeaderPrimary from '../../components/Header/HeaderPrimary';
+import HomeScreen from '../HomeScreen/HomeScreen';
 
 
 export default class RegisterScreen extends Component {
@@ -39,7 +40,6 @@ export default class RegisterScreen extends Component {
             password:'',
             address:'',
             selected_gender:'',
-            uniqueID:'',
             dob:'Birthday',
             loading:false,
             isDatePickerVisible: false,
@@ -86,7 +86,8 @@ export default class RegisterScreen extends Component {
          this.state.nic_number.length<=0 || 
          this.state.password.length<=0 ||
          this.state.selected_gender.length<=0 ||
-         this.state.address.length<=0){
+         this.state.address.length<=0 || 
+         this.state.dob.length<=0){
             Alert.alert(
                 'Fill All Fields',
                 'Please fill all the fields ...',
@@ -123,21 +124,12 @@ export default class RegisterScreen extends Component {
     API_RegisterUser = () => {
         this.setState({loading:true})
 
-        var Full_Name = this.state.full_name;
-        var Email = this.state.email;
-        var NIC_Number = this.state.nic_number;
-        var Password = this.state.password;
         var gender;
         if(this.state.selected_gender == 0){
             gender = 'Male'
         }else{
             gender =  'Female'
         }
-        var Address = this.state.address;
-        var date = new Date().getDate();
-        var month = new Date().getMonth() + 1;
-        var year = new Date().getFullYear();
-        var current_date = date + '-' + month + '-' + year;
 
         fetch(API.API_REGISTER,{
             method:'POST',
@@ -145,14 +137,14 @@ export default class RegisterScreen extends Component {
                 'Content-Type': 'application/json',
             },
             body:JSON.stringify( {
-                "Full_Name":Full_Name,
-                "Email":Email,
-                "NIC_Number":NIC_Number,
-                "Password":Password,
+                "Full_Name":this.state.full_name,
+                "Email":this.state.email,
+                "Mobile_Number":this.state.mobile_number,
+                "Password":this.state.password,
+                "NIC_Number":this.state.nic_number,
+                "Address":this.state.address,
                 "Gender":gender,
-                "Address":Address,
-                "Unique_ID":this.state.uniqueID,
-                "Registration_Date":current_date
+                "DOB":this.state.dob
             })
             })
             .then((response) => response.json())

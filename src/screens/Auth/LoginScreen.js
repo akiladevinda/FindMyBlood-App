@@ -23,6 +23,7 @@ import AppStyles from '../../config/AppStyles';
 import CustomButtonPrimary from '../../components/CustomButton/CustomButtonPrimary';
 import Spinner from 'react-native-loading-spinner-overlay';
 import API from '../../config/API';
+import HomeScreen from '../HomeScreen/HomeScreen';
 
 export default class LoginScreen extends Component {
 

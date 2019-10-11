@@ -11,6 +11,7 @@ import SplashScreen from "../screens/SplashScreen/SplashScreen";
 import MainScreen from "../screens/Auth/MainScreen";
 import LoginScreen from "../screens/Auth/LoginScreen";
 import RegisterScreen from "../screens/Auth/RegisterScreen";
+import HomeScreen from "../screens/HomeScreen/HomeScreen";
 
 //Creating Stack Navigator for All Routes in Application
 const AppNavigator = createStackNavigator({
@@ -44,7 +45,13 @@ const AppNavigator = createStackNavigator({
           gesturesEnabled: false 
         },   
     },
-
+    HomeScreen: {
+          screen:HomeScreen,
+          navigationOptions: { 
+            header: null,  
+            gesturesEnabled: false 
+          },   
+      },
 }, {
     transitionConfig: () => fromRight(),
 });
