@@ -1,7 +1,8 @@
 /** 
  * FindMyBlood 
- * Register Screen of the Application
+ * Add New Doner Screen
  */
+
 
 import React, { Component } from 'react';
 import { 
@@ -9,43 +10,53 @@ import {
     Text,
     StyleSheet,
     ScrollView,
-    Image,
     TextInput,
     Alert,
-    TouchableOpacity,
-    BackHandler
+    BackHandler,
+    Image,
+    TouchableOpacity
 } from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
-import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
+import HeaderPrimary from '../../components/Header/HeaderPrimary';
 import DateTimePicker from "react-native-modal-datetime-picker";
-import Metrics from '../../config/Metrics';
+import Spinner from 'react-native-loading-spinner-overlay';
+import CustomButtonPrimary from '../../components/CustomButton/CustomButtonPrimary';
 import Assets from '../../config/Assets';
 import AppStyles from '../../config/AppStyles';
-import CustomButtonPrimary from '../../components/CustomButton/CustomButtonPrimary';
-import Spinner from 'react-native-loading-spinner-overlay';
+import Metrics from '../../config/Metrics';
+import TagSelect from '../../components/TagSelect/TagSelect';
 import API from '../../config/API';
-import HeaderPrimary from '../../components/Header/HeaderPrimary';
 import HomeScreen from '../HomeScreen/HomeScreen';
 
-
-export default class RegisterScreen extends Component {
+export default class AddNewDoner extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
             full_name:'',
-            nic_number:'',
-            mobile_number:'',
             email:'',
-            password:'',
+            nic:'',
+            mobile_number:'',
             address:'',
-            selected_gender:'',
-            dob:'Birthday',
+            dob:'Date of Birth',
+            blood_group:'',
+            gender:'',
             loading:false,
             isDatePickerVisible: false,
             gender_data:[  
-            {label: 'Male', value: 0 },
-            {label: 'Female', value: 1 }]
+                {label: 'Male', id: 1 },
+                {label: 'Female', id: 2 }
+            ],
+            blood_group_data:[  
+                {label: 'A+', id: 1 },
+                {label: 'A-', id: 2 },
+                {label: 'B+', id: 3 },
+                {label: 'B-', id: 4 },
+                {label: 'O+', id: 5 },
+                {label: 'O-', id: 6 },
+                {label: 'AB+', id: 7 },
+                {label: 'AB-', id: 8}
+            ]
+
         }
     }
 
@@ -61,6 +72,11 @@ export default class RegisterScreen extends Component {
     backButtonOnPress = () => {
         this.props.navigation.goBack();
         return true;
+    }
+
+    //Home navigation
+    navigateToHome = () => {
+        this.props.navigation.navigate("HomeScreen",{screen:HomeScreen})
     }
 
     //Date Picker handling methods
@@ -80,58 +96,37 @@ export default class RegisterScreen extends Component {
         this.setState({ isDatePickerVisible: true });
     };
 
-    //Form Validation
-    regFormValidation = () => {
-        if(this.state.full_name.length<=0 ||
-         this.state.nic_number.length<=0 || 
-         this.state.password.length<=0 ||
-         this.state.selected_gender.length<=0 ||
-         this.state.address.length<=0 || 
-         this.state.dob.length<=0){
-            Alert.alert(
-                'Fill All Fields',
-                'Please fill all the fields ...',
-                [
-                {text: 'OK',},
-                ],
-                {cancelable: false},
-            );
-         }else{
-             this.API_RegisterUser(); // User Register API Call      
-         }
-    }
+    //Submit form validation
+    submitFormValidation = () => {
 
-    //Login button click method
-    buttonOnClickListner = () => {
-        this.regFormValidation(); // register form validation 
-    }
+        // alert(this.state.gender.itemsSelected[0].label.length)
 
-    //Save user details and navigate to home screen
-    navigateToHome = () => {
-        //Save User Name and Email - AsyncStorage
-        try {
-            AsyncStorage.setItem('Logged_User_Email', JSON.stringify(this.state.email));
-        }
-        catch (e) {
-        console.log('caught error', e);
-        }
-
-        this.props.navigation.navigate("HomeScreen",{screen:HomeScreen})
+        if(this.state.full_name.length<=0 || this.state.email.length<=0 ||
+            this.state.nic.length<=0 || this.state.mobile_number.length<=0||
+            this.state.address.length<=0 || this.state.blood_group.itemsSelected[0].label.length<=0 ||
+            this.state.gender.itemsSelected[0].label.length<=0){
+                Alert.alert(
+                    'Fill All Fields',
+                    'Please fill all the fields ...',
+                    [
+                    {text: 'OK',},
+                    ],
+                    {cancelable: false},
+                );
+            }else{
+                this.API_AddNewDoner();
+            }
 
     }
 
-    //API Calling function for register user
-    API_RegisterUser = () => {
+    //Add New Doner API Fetch Method
+    API_AddNewDoner = () => {
         this.setState({loading:true})
 
-        var gender;
-        if(this.state.selected_gender == 0){
-            gender = 'Male'
-        }else{
-            gender =  'Female'
-        }
+        let Gender = this.state.gender.itemsSelected[0].label //Get Gender
+        let BloodGroup = this.state.blood_group.itemsSelected[0].label  //Get Blood Group
 
-        fetch(API.API_REGISTER,{
+        fetch(API.API_ADD_DONER,{
             method:'POST',
             headers:{
                 'Content-Type': 'application/json',
@@ -140,36 +135,36 @@ export default class RegisterScreen extends Component {
                 "Full_Name":this.state.full_name,
                 "Email":this.state.email,
                 "Mobile_Number":this.state.mobile_number,
-                "Password":this.state.password,
-                "NIC_Number":this.state.nic_number,
+                "NIC_Number": this.state.nic,
                 "Address":this.state.address,
-                "Gender":gender,
-                "DOB":this.state.dob
+                "DOB":this.state.dob,
+                "Blood_Group":BloodGroup,
+                "Gender":Gender
             })
             })
             .then((response) => response.json())
             .then((responseText) => {
-                if(responseText.status_code == '200'){ //Registration auccessfull
-                    this.setState({loading:false})
+                this.setState({loading:false})
+                if(responseText.status_code == '200'){
                     Alert.alert(
-                        'Account Created !',
-                        'You have successfully created new account ...',
+                        'Doner Added',
+                        'You have successfully added new doner...',
                         [
                         {text: 'OK',onPress: () => this.navigateToHome()},
                         ],
                         {cancelable: false},
                     );
-                }else if(responseText.status_code == '401'){  // NIC or email already exsists
-                    this.setState({loading:false})
+                }else if(responseText.status_code == '401'){
                     Alert.alert(
-                        'User Already Exists',
-                        'If you have account please log in ...',
+                        'Doner Already Exists',
+                        'Please try to add new doner ...',
                         [
                         {text: 'OK',},
                         ],
                         {cancelable: false},
                     );
                 }
+
             })
             .catch((error) => {
                 this.setState({loading:false})
@@ -187,19 +182,13 @@ export default class RegisterScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-           
-           <ScrollView>
-    
-            <HeaderPrimary
-                title='Register'
-                onPress={ ()=> this.backButtonOnPress()}
-            />
-
+            <HeaderPrimary title='Add New Doner' onPress={ ()=> this.backButtonOnPress()}/>
+            <ScrollView>
             <View style={{height:10}}></View>
             <View style={styles.inputContainer}>
             <Image style={styles.inputIcon} source={Assets.IC_FULLNAME}/>
             <TextInput style={styles.inputs}
-                placeholder="Full Name"
+                placeholder="Doner Name"
                 keyboardType="default"
                 underlineColorAndroid='transparent'
                 onChangeText={(full_name) => this.setState({full_name})}/>
@@ -229,18 +218,8 @@ export default class RegisterScreen extends Component {
                 placeholder="NIC Number"
                 keyboardType="default"
                 underlineColorAndroid='transparent'
-                onChangeText={(nic_number) => this.setState({nic_number})}/>
+                onChangeText={(nic) => this.setState({nic})}/>
             </View> 
-            <View style={{height:10}}></View>
-            <View style={styles.inputContainer}>
-            <Image style={styles.inputIcon} source={Assets.IC_PASSWORD}/>
-            <TextInput style={styles.inputs}
-                placeholder="Password"
-                keyboardType="default"
-                underlineColorAndroid='transparent'
-                secureTextEntry={true}
-                onChangeText={(password) => this.setState({password})}/>
-            </View>
             <View style={{height:10}}></View>
             <TouchableOpacity onPress={ ()=> this.showDatePicker()}>
             <View style={styles.inputContainer}>
@@ -262,20 +241,37 @@ export default class RegisterScreen extends Component {
 
             <View style={styles.genderView}>
             <Text style={{fontFamily:AppStyles.primaryFont,fontSize:20,marginBottom:10,marginTop:10}}>Gender</Text>
-            <RadioForm
-                radio_props={this.state.gender_data}
-                initial={-1}
-                formHorizontal={true}
-                labelHorizontal={false}
-                buttonColor={AppStyles.primaryColor}
-                selectedButtonColor={AppStyles.primaryColor}
-                buttonSize={30}
-                buttonOuterSize={40}
-                animation={false}
-                labelStyle={{fontFamily:AppStyles.primaryFontLight,fontSize:18}}
-                buttonWrapStyle={{marginLeft: 20}}
-                onPress={(value) => {this.setState({selected_gender:value})}}
-            />
+            <TagSelect
+                data={this.state.gender_data}
+                ref={(tag) => {
+                    this.state.gender = tag;
+                }}
+                itemStyle={styles.item}
+                itemLabelStyle={styles.label}
+                itemStyleSelected={styles.itemSelected}
+                itemLabelStyleSelected={styles.labelSelected}
+                containerStyle={styles.nationDataContainer}
+                max={1}
+                onMaxError={() => {}}
+                />
+
+            </View>
+
+            <View style={styles.genderView}>
+            <Text style={{fontFamily:AppStyles.primaryFont,fontSize:20,marginBottom:10,marginTop:10}}>Blood Type</Text>
+            <TagSelect
+                data={this.state.blood_group_data}
+                ref={(tag) => {
+                    this.state.blood_group = tag;
+                }}
+                itemStyle={styles.item}
+                itemLabelStyle={styles.label}
+                itemStyleSelected={styles.itemSelected}
+                itemLabelStyleSelected={styles.labelSelected}
+                containerStyle={styles.nationDataContainer}
+                max={1}
+                onMaxError={() => {}}
+                />
             </View>
 
             
@@ -283,13 +279,13 @@ export default class RegisterScreen extends Component {
             <View style={{height:40}}></View>
 
             <CustomButtonPrimary 
-                title='REGISTER'
-                onPress = { ()=> this.buttonOnClickListner()}
+                title='ADD DONER'
+                onPress = { ()=> this.submitFormValidation()}
             />
 
             <View style={{height:10}}></View>
             </ScrollView>
-            
+
             <Spinner
             visible={this.state.loading}
             cancelable={false}
@@ -301,7 +297,7 @@ export default class RegisterScreen extends Component {
                 onConfirm={this.handleDatePicked}
                 onCancel={this.hideDatePicker}
             />  
-
+            
             </View>
         );
     }
@@ -310,17 +306,6 @@ export default class RegisterScreen extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-    },
-    headerView:{
-        width:Metrics.DEVICE_WIDTH,
-        height:Metrics.DEVICE_HEIGHT/2.4,
-        backgroundColor:'red',
-        borderBottomRightRadius:150,
-    },
-    appLogo:{
-        width:Metrics.DEVICE_WIDTH,
-        height:Metrics.DEVICE_HEIGHT/3.8,
-        resizeMode:'contain',
     },
     inputContainer: {
         borderRadius:20,
@@ -347,9 +332,29 @@ const styles = StyleSheet.create({
     genderView:{
         marginLeft:Metrics.DEVICE_WIDTH/9,
         marginTop:10,
+        alignSelf:'auto'
     },
     dateAndtime:{
         fontFamily:AppStyles.primaryFont,
         marginLeft:18
     },
+    item: {
+        borderWidth: 1,
+        borderColor: '#f54242',    
+        backgroundColor: '#FFF',
+      },
+      label: {
+        color: '#333',
+        fontSize:16
+      },
+      itemSelected: {
+        backgroundColor: AppStyles.primaryColorLight,
+      },
+      labelSelected: {
+        color: '#FFF',
+      },
+      nationDataContainer:{
+        flexDirection:'row',
+        padding:10,
+      },
 });

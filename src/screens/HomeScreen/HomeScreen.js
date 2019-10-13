@@ -18,6 +18,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import Metrics from '../../config/Metrics';
 import Assets from '../../config/Assets';
 import AppStyles from '../../config/AppStyles';
+import AddNewDoner from '../AddDoners/AddNewDoner';
 
 export default class HomeScreen extends Component {
 
@@ -35,6 +36,15 @@ export default class HomeScreen extends Component {
                 {id:6, title: "Log Out", image:Assets.HOME_LOGOUT},
             ]
         }
+    }
+
+    //Menu button click event 
+    clickEventListener = (value) => {
+
+        if(value.id == 1){
+            this.props.navigation.navigate("AddNewDoner",{screen:AddNewDoner})
+        }
+    
     }
 
     render() {
