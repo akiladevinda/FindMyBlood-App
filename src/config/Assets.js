@@ -19,6 +19,12 @@ const Assets = {
     IC_NOTIFICATION : require('../assets/header/notifications.png'),
     IC_MOBILE_NO : require('../assets/auth/mobile.png'),
     IC_DATE:require('../assets/auth/date.png'),
+    HOME_ADDDONERS:require('../assets/home/add-doners.png'),
+    HOME_CREATECAMP:require('../assets/home/create-camp.png'),
+    HOME_NEWSFEED:require('../assets/home/news.png'),
+    HOME_SEARCHUSERS:require('../assets/home/search-users.png'),
+    HOME_PROFILE:require('../assets/home/profile.png'),
+    HOME_LOGOUT:require('../assets/home/logout.png'),
 };
 
 

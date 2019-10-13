@@ -23,28 +23,28 @@ const AppNavigator = createStackNavigator({
   //     },   
   //   },
 
-  MainScreen: {
-        screen:MainScreen,
-        navigationOptions: { 
-          header: null,  
-          gesturesEnabled: false 
-        },   
-      },
+  // MainScreen: {
+  //       screen:MainScreen,
+  //       navigationOptions: { 
+  //         header: null,  
+  //         gesturesEnabled: false 
+  //       },   
+  //     },
 
-    LoginScreen: {
-          screen:LoginScreen,
-          navigationOptions: { 
-            header: null,  
-            gesturesEnabled: false 
-          },   
-      },
-     RegisterScreen: {
-        screen:RegisterScreen,
-        navigationOptions: { 
-          header: null,  
-          gesturesEnabled: false 
-        },   
-    },
+  //   LoginScreen: {
+  //         screen:LoginScreen,
+  //         navigationOptions: { 
+  //           header: null,  
+  //           gesturesEnabled: false 
+  //         },   
+  //     },
+  //    RegisterScreen: {
+  //       screen:RegisterScreen,
+  //       navigationOptions: { 
+  //         header: null,  
+  //         gesturesEnabled: false 
+  //       },   
+  //   },
     HomeScreen: {
           screen:HomeScreen,
           navigationOptions: { 
