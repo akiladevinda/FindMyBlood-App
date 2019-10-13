@@ -14,6 +14,7 @@ import {
     TouchableOpacity,
     FlatList
 } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import LinearGradient from 'react-native-linear-gradient';
 import Metrics from '../../config/Metrics';
 import Assets from '../../config/Assets';
@@ -36,6 +37,10 @@ export default class HomeScreen extends Component {
                 {id:6, title: "Log Out", image:Assets.HOME_LOGOUT},
             ]
         }
+    }
+
+    componentWillMount(){
+        AsyncStorage.setItem('alreadyLaunched', JSON.stringify(true));
     }
 
     //Menu button click event 

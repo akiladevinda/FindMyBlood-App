@@ -16,6 +16,7 @@ import Statusbar from '../../components/Statusbar/Statusbar';
 import Assets from '../../config/Assets';
 import Metrics from '../../config/Metrics';
 import MainScreen from '../Auth/MainScreen';
+import HomeScreen from '../HomeScreen/HomeScreen';
 
 export default class SplashScreen extends Component {
 
@@ -27,34 +28,30 @@ export default class SplashScreen extends Component {
 
     componentWillMount(){
     //  //Check user already signed in or not
-    //     AsyncStorage.getItem("alreadyLaunched").then(value => {
+        AsyncStorage.getItem("alreadyLaunched").then(value => {
 
-    //         var launchedBefore = JSON.parse(value);
-    //         if(launchedBefore == null){
-    //         setTimeout(() => {
-    //             this.props.navigation.navigate("MainScreen",{screen:MainScreen});
-    //         }, 1000);
+            var launchedBefore = JSON.parse(value);
+            if(launchedBefore == null){
+            setTimeout(() => {
+                this.props.navigation.navigate("MainScreen",{screen:MainScreen});
+            }, 1000);
 
-    //         }
-    //         else if(launchedBefore == true){
-    //         setTimeout(() => {
-    //             this.props.navigation.navigate("HomeScreen",{screen:HomeScreen});
-    //         }, 1000);
+            }
+            else if(launchedBefore == true){
+            setTimeout(() => {
+                this.props.navigation.navigate("HomeScreen",{screen:HomeScreen});
+            }, 1000);
 
-    //         }
+            }
 
-    //         else if(launchedBefore == false){
-    //         setTimeout(() => {
-    //             this.props.navigation.navigate("MainScreen",{screen: MainScreen});
-    //         }, 1000);
+            else if(launchedBefore == false){
+            setTimeout(() => {
+                this.props.navigation.navigate("MainScreen",{screen: MainScreen});
+            }, 1000);
 
-    //         }
+            }
 
-    //     })
-
-        setTimeout(() => {
-            this.props.navigation.navigate("MainScreen",{screen:MainScreen});
-        }, 1000);
+        })
 
 
     }
