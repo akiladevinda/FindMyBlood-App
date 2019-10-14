@@ -19,6 +19,8 @@ import NewsFeedMore from "../screens/NewsFeed/NewsFeedMore";
 import AddRequests from "../screens/EmgRequests/AddRequests";
 import ViewUsers from "../screens/Users/ViewUsers";
 import ViewUsersMore from "../screens/Users/ViewUsersMore";
+import ViewDoners from "../screens/AddDoners/ViewDoners";
+import VeiwDonersMore from "../screens/AddDoners/ViewDonersMore";
 
 //Creating Stack Navigator for All Routes in Application
 const AppNavigator = createStackNavigator({
@@ -108,7 +110,21 @@ const AppNavigator = createStackNavigator({
             gesturesEnabled: false 
           },   
       },
-
+      ViewDoners: {
+            screen:ViewDoners,
+            navigationOptions: { 
+              header: null,  
+              gesturesEnabled: false 
+            },   
+        },
+        VeiwDonersMore: {
+            screen:VeiwDonersMore,
+            navigationOptions: { 
+              header: null,  
+              gesturesEnabled: false 
+            },   
+        },
+  
 
 }, {
     transitionConfig: () => fromRight(),

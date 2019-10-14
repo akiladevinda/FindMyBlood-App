@@ -28,6 +28,7 @@ import AddRequests from '../EmgRequests/AddRequests';
 import API from '../../config/API';
 import MainScreen from '../Auth/MainScreen';
 import ViewUsers from '../Users/ViewUsers';
+import ViewDoners from '../AddDoners/ViewDoners';
 
 export default class HomeScreen extends Component {
 
@@ -99,6 +100,8 @@ export default class HomeScreen extends Component {
             );
         }else if(value.id == 4){
             this.props.navigation.navigate("ViewUsers",{screen:ViewUsers,onGoBack: () => this.refreshScreen(),})
+        }else if(value == 'doners'){
+            this.props.navigation.navigate("ViewDoners",{screen:ViewDoners,onGoBack: () => this.refreshScreen(),})
         }
     
     
@@ -145,7 +148,7 @@ export default class HomeScreen extends Component {
                 <View style={styles.headerInfo}>
                 <Text style={styles.headerInfoText}>{this.state.doners_count} New Doners</Text>
                 <View style={styles.headerInfoButtonConrainer}>
-                <TouchableOpacity style={styles.headerInfoButton} onPress={ ()=> alert('g')}>
+                <TouchableOpacity style={styles.headerInfoButton} onPress={ ()=> this.clickEventListener('doners')}>
                 <Text style={styles.headerInforButtonText}>VIEW ALL</Text>
                 </TouchableOpacity>
                 </View>
