@@ -20,6 +20,7 @@ import Metrics from '../../config/Metrics';
 import Assets from '../../config/Assets';
 import AppStyles from '../../config/AppStyles';
 import AddNewDoner from '../AddDoners/AddNewDoner';
+import DonationCamp from '../DonationCamp/DonationCamp';
 
 export default class HomeScreen extends Component {
 
@@ -48,6 +49,8 @@ export default class HomeScreen extends Component {
 
         if(value.id == 1){
             this.props.navigation.navigate("AddNewDoner",{screen:AddNewDoner})
+        }else if(value.id == 2){
+            this.props.navigation.navigate("DonationCamp",{screen:DonationCamp})
         }
     
     }

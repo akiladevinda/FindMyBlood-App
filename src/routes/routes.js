@@ -13,6 +13,7 @@ import LoginScreen from "../screens/Auth/LoginScreen";
 import RegisterScreen from "../screens/Auth/RegisterScreen";
 import HomeScreen from "../screens/HomeScreen/HomeScreen";
 import AddNewDoner from "../screens/AddDoners/AddNewDoner";
+import DonationCamp from "../screens/DonationCamp/DonationCamp";
 
 //Creating Stack Navigator for All Routes in Application
 const AppNavigator = createStackNavigator({
@@ -55,6 +56,13 @@ const AppNavigator = createStackNavigator({
       },
     AddNewDoner: {
           screen:AddNewDoner,
+          navigationOptions: { 
+            header: null,  
+            gesturesEnabled: false 
+          },   
+      },
+    DonationCamp: {
+          screen:DonationCamp,
           navigationOptions: { 
             header: null,  
             gesturesEnabled: false 
