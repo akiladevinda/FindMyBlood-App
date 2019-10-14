@@ -1,6 +1,6 @@
 /** 
  * FindMyBlood 
- * Doners Proifle View
+ * View Requests In Detail Screen
  */
 
 
@@ -20,18 +20,17 @@ import Assets from '../../config/Assets';
 import Metrics from '../../config/Metrics';
 import AppStyles from '../../config/AppStyles';
 
-export default class VeiwDonersMore extends Component {
+export default class RequestsMore extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            user_fullname:this.props.navigation.state.params.Doners.Full_Name,
-            mobile_number:this.props.navigation.state.params.Doners.Mobile_Number,
-            email:this.props.navigation.state.params.Doners.Email,
-            dob:this.props.navigation.state.params.Doners.DOB,
-            gender:this.props.navigation.state.params.Doners.Gender,
-            blood_group:this.props.navigation.state.params.Doners.Blood_Group,
-            address:this.props.navigation.state.params.Doners.Address,
+            user_fullname:this.props.navigation.state.params.Requests.Full_Name,
+            mobile_number:this.props.navigation.state.params.Requests.Mobile_Number,
+            email:this.props.navigation.state.params.Requests.Email,
+            gender:this.props.navigation.state.params.Requests.Gender,
+            blood_group:this.props.navigation.state.params.Requests.Blood_Group,
+            address:this.props.navigation.state.params.Requests.Address,
         }
     }
 
@@ -71,7 +70,7 @@ export default class VeiwDonersMore extends Component {
             <View style={styles.borderSeparater}></View>
 
             <View style={styles.infoContainer}>
-                <Text style={styles.infoHeading}>Blood Group :</Text>
+                <Text style={styles.infoHeading}>Blood Group Wanted :</Text>
                 <Text style={styles.infoText}>{this.state.blood_group}</Text>
             </View> 
 
@@ -83,17 +82,7 @@ export default class VeiwDonersMore extends Component {
             <View style={styles.infoContainer}>
                 <Text style={styles.infoHeading}>Email :</Text>
                 <Text style={styles.infoText}>{this.state.email}</Text>
-            </View> 
-
-            <View style={styles.infoContainer}>
-                <Text style={styles.infoHeading}>Date of Birth :</Text>
-                <Text style={styles.infoText}>{this.state.dob}</Text>
-            </View> 
-
-            <View style={styles.infoContainer}>
-                <Text style={styles.infoHeading}>Gender :</Text>
-                <Text style={styles.infoText}>{this.state.gender}</Text>
-            </View> 
+            </View>
 
             <View style={styles.infoContainer}>
                 <Text style={styles.infoHeading}>Address :</Text>

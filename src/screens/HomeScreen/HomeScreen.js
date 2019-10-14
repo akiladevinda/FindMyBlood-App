@@ -29,6 +29,7 @@ import API from '../../config/API';
 import MainScreen from '../Auth/MainScreen';
 import ViewUsers from '../Users/ViewUsers';
 import ViewDoners from '../AddDoners/ViewDoners';
+import Requests from '../UserRequests/Requests';
 
 export default class HomeScreen extends Component {
 
@@ -102,6 +103,8 @@ export default class HomeScreen extends Component {
             this.props.navigation.navigate("ViewUsers",{screen:ViewUsers,onGoBack: () => this.refreshScreen(),})
         }else if(value == 'doners'){
             this.props.navigation.navigate("ViewDoners",{screen:ViewDoners,onGoBack: () => this.refreshScreen(),})
+        }else if(value == 'requests'){
+            this.props.navigation.navigate("Requests",{screen:Requests,onGoBack: () => this.refreshScreen(),})
         }
     
     
@@ -157,7 +160,7 @@ export default class HomeScreen extends Component {
                 <View style={styles.headerInfo}>
                 <Text style={styles.headerInfoText}>{this.state.requests_count} New Requests</Text>
                 <View style={styles.headerInfoButtonConrainer}>
-                <TouchableOpacity style={styles.headerInfoButton} onPress={ ()=> alert('g')}>
+                <TouchableOpacity style={styles.headerInfoButton} onPress={ ()=> this.clickEventListener('requests')}>
                 <Text style={styles.headerInforButtonText}>VIEW ALL</Text>
                 </TouchableOpacity>
                 </View>
