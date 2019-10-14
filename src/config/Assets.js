@@ -27,6 +27,7 @@ const Assets = {
     HOME_SEARCHUSERS:require('../assets/home/search-users.png'),
     HOME_PROFILE:require('../assets/home/profile.png'),
     HOME_LOGOUT:require('../assets/home/logout.png'),
+    USER_AVATAR:require('../assets/user/avatar.png'),
     
 };
 

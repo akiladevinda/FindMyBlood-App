@@ -11,9 +11,11 @@ const API_REGISTER = PROTOCOL+HOST+'/findmyblood/api/register-user.php'
 const API_LOGIN = PROTOCOL+HOST+'/findmyblood/api/login-user.php'
 const API_ADD_DONER = PROTOCOL+HOST+'/findmyblood/api/add-doner.php'
 const API_ADD_CAMP = PROTOCOL+HOST+'/findmyblood/api/add-camp.php'
-const API_GET_NEWS = PROTOCOL+HOST+'/findmyblood/api/get-camps.php'
 const API_ADD_REQUEST = PROTOCOL+HOST+'/findmyblood/api/add-request.php'
 const API_GET_COUNTS = PROTOCOL+HOST+'/findmyblood/api/get-counts.php'
+const API_GET_NEWS = PROTOCOL+HOST+'/findmyblood/api/get-camps.php'
+const API_GET_USERS = PROTOCOL+HOST+'/findmyblood/api/get-users.php'
+
 
 //Exporting All API Links to Use
 export default
@@ -25,6 +27,7 @@ export default
     API_GET_NEWS:API_GET_NEWS,
     API_ADD_REQUEST:API_ADD_REQUEST,
     API_GET_COUNTS:API_GET_COUNTS,
+    API_GET_USERS:API_GET_USERS,
 }
     
  

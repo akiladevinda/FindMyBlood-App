@@ -12,7 +12,9 @@ import {
     ScrollView,
     Image,
     TouchableOpacity,
-    FlatList
+    FlatList,
+    Alert,
+    BackHandler
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import LinearGradient from 'react-native-linear-gradient';
@@ -24,6 +26,8 @@ import DonationCamp from '../DonationCamp/DonationCamp';
 import NewsFeed from '../NewsFeed/NewsFeed';
 import AddRequests from '../EmgRequests/AddRequests';
 import API from '../../config/API';
+import MainScreen from '../Auth/MainScreen';
+import ViewUsers from '../Users/ViewUsers';
 
 export default class HomeScreen extends Component {
 
@@ -48,9 +52,28 @@ export default class HomeScreen extends Component {
         this.API_GetHomeScreenCounts();
     }
 
+    componentDidMount(){
+        BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
+    }
+      
+    componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+    }
+
+    handleBackButton(){
+        BackHandler.exitApp();
+        return true;
+    }
+
     //Refresh Screen
     refreshScreen = () => {
         this.API_GetHomeScreenCounts();
+    }
+
+    //User LogOut
+    user_logOut = () => {
+        AsyncStorage.clear(); //clear all the local storage data
+        this.props.navigation.navigate("MainScreen",{screen:MainScreen}) //Navigate to main screen of the app
     }
 
     //Menu button click event 
@@ -64,6 +87,18 @@ export default class HomeScreen extends Component {
             this.props.navigation.navigate("NewsFeed",{screen:NewsFeed,onGoBack: () => this.refreshScreen(),})
         }else if(value == 'addemer'){
             this.props.navigation.navigate("AddRequests",{screen:AddRequests,onGoBack: () => this.refreshScreen(),})
+        }else if(value.id == 6){
+            Alert.alert(
+                'Confirm !',
+                'Are you sure want to log out ?',
+                [
+                {text: 'YES',onPress: () => this.user_logOut(),},
+                {text: 'NO',style: 'cancel',},
+                ],
+                {cancelable: false},
+            );
+        }else if(value.id == 4){
+            this.props.navigation.navigate("ViewUsers",{screen:ViewUsers,onGoBack: () => this.refreshScreen(),})
         }
     
     
@@ -85,7 +120,7 @@ export default class HomeScreen extends Component {
                         doners_count:responseText.data[0].doners_count,
                         requests_count:responseText.data[0].req_count
                     })
-                    
+
                 }else{
                     this.setState({doners_count:'NaN',requests_count:'NaN'})
                 }
