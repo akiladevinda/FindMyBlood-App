@@ -23,6 +23,7 @@ import ViewDoners from "../screens/AddDoners/ViewDoners";
 import VeiwDonersMore from "../screens/AddDoners/ViewDonersMore";
 import Requests from "../screens/UserRequests/Requests";
 import RequestsMore from "../screens/UserRequests/RequestsMore";
+import UserPfofile from "../screens/UserProfile/UserProfile";
 
 //Creating Stack Navigator for All Routes in Application
 const AppNavigator = createStackNavigator({
@@ -119,27 +120,34 @@ const AppNavigator = createStackNavigator({
               gesturesEnabled: false 
             },   
         },
-        VeiwDonersMore: {
-            screen:VeiwDonersMore,
+      VeiwDonersMore: {
+          screen:VeiwDonersMore,
+          navigationOptions: { 
+            header: null,  
+            gesturesEnabled: false 
+          },   
+      },
+      Requests: {
+            screen:Requests,
             navigationOptions: { 
               header: null,  
               gesturesEnabled: false 
             },   
         },
-        Requests: {
-              screen:Requests,
-              navigationOptions: { 
-                header: null,  
-                gesturesEnabled: false 
-              },   
-          },
-          RequestsMore: {
-                screen:RequestsMore,
-                navigationOptions: { 
-                  header: null,  
-                  gesturesEnabled: false 
-                },   
-            },
+      RequestsMore: {
+            screen:RequestsMore,
+            navigationOptions: { 
+              header: null,  
+              gesturesEnabled: false 
+            },   
+        },
+        UserPfofile: {
+            screen:UserPfofile,
+            navigationOptions: { 
+              header: null,  
+              gesturesEnabled: false 
+            },   
+        },
 
 }, {
     transitionConfig: () => fromRight(),

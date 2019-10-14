@@ -17,7 +17,7 @@ const API_GET_NEWS = PROTOCOL+HOST+'/findmyblood/api/get-camps.php'
 const API_GET_USERS = PROTOCOL+HOST+'/findmyblood/api/get-users.php'
 const API_GET_DONERS = PROTOCOL+HOST+'/findmyblood/api/get-doners.php'
 const API_GET_REQUESTS = PROTOCOL+HOST+'/findmyblood/api/get-requests.php'
-
+const API_GET_USERPROFILE = PROTOCOL+HOST+'/findmyblood/api/user-profile.php'
 
 //Exporting All API Links to Use
 export default
@@ -32,6 +32,7 @@ export default
     API_GET_USERS:API_GET_USERS,
     API_GET_DONERS:API_GET_DONERS,
     API_GET_REQUESTS:API_GET_REQUESTS,
+    API_GET_USERPROFILE:API_GET_USERPROFILE,
     
 }
     

@@ -30,6 +30,7 @@ import MainScreen from '../Auth/MainScreen';
 import ViewUsers from '../Users/ViewUsers';
 import ViewDoners from '../AddDoners/ViewDoners';
 import Requests from '../UserRequests/Requests';
+import UserPfofile from '../UserProfile/UserProfile';
 
 export default class HomeScreen extends Component {
 
@@ -105,6 +106,8 @@ export default class HomeScreen extends Component {
             this.props.navigation.navigate("ViewDoners",{screen:ViewDoners,onGoBack: () => this.refreshScreen(),})
         }else if(value == 'requests'){
             this.props.navigation.navigate("Requests",{screen:Requests,onGoBack: () => this.refreshScreen(),})
+        }else if(value.id == 5){
+            this.props.navigation.navigate("UserPfofile",{screen:UserPfofile,})
         }
     
     
