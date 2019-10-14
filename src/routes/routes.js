@@ -14,6 +14,8 @@ import RegisterScreen from "../screens/Auth/RegisterScreen";
 import HomeScreen from "../screens/HomeScreen/HomeScreen";
 import AddNewDoner from "../screens/AddDoners/AddNewDoner";
 import DonationCamp from "../screens/DonationCamp/DonationCamp";
+import NewsFeed from "../screens/NewsFeed/NewsFeed";
+import NewsFeedMore from "../screens/NewsFeed/NewsFeedMore";
 
 //Creating Stack Navigator for All Routes in Application
 const AppNavigator = createStackNavigator({
@@ -68,6 +70,22 @@ const AppNavigator = createStackNavigator({
             gesturesEnabled: false 
           },   
       },
+    NewsFeed: {
+        screen:NewsFeed,
+        navigationOptions: { 
+          header: null,  
+          gesturesEnabled: false 
+        },   
+    },
+    NewsFeedMore: {
+          screen:NewsFeedMore,
+          navigationOptions: { 
+            header: null,  
+            gesturesEnabled: false 
+          },   
+      },
+
+
 }, {
     transitionConfig: () => fromRight(),
 });

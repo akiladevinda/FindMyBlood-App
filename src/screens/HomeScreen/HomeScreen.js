@@ -21,6 +21,7 @@ import Assets from '../../config/Assets';
 import AppStyles from '../../config/AppStyles';
 import AddNewDoner from '../AddDoners/AddNewDoner';
 import DonationCamp from '../DonationCamp/DonationCamp';
+import NewsFeed from '../NewsFeed/NewsFeed';
 
 export default class HomeScreen extends Component {
 
@@ -51,7 +52,10 @@ export default class HomeScreen extends Component {
             this.props.navigation.navigate("AddNewDoner",{screen:AddNewDoner})
         }else if(value.id == 2){
             this.props.navigation.navigate("DonationCamp",{screen:DonationCamp})
+        }else if(value.id == 3){
+            this.props.navigation.navigate("NewsFeed",{screen:NewsFeed})
         }
+    
     
     }
 

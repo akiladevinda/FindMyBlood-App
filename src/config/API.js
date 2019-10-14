@@ -11,6 +11,7 @@ const API_REGISTER = PROTOCOL+HOST+'/findmyblood/api/register-user.php'
 const API_LOGIN = PROTOCOL+HOST+'/findmyblood/api/login-user.php'
 const API_ADD_DONER = PROTOCOL+HOST+'/findmyblood/api/add-doner.php'
 const API_ADD_CAMP = PROTOCOL+HOST+'/findmyblood/api/add-camp.php'
+const API_GET_NEWS = PROTOCOL+HOST+'/findmyblood/api/get-camps.php'
 
 //Exporting All API Links to Use
 export default
@@ -19,6 +20,7 @@ export default
     API_LOGIN:API_LOGIN,
     API_ADD_DONER:API_ADD_DONER,
     API_ADD_CAMP:API_ADD_CAMP,
+    API_GET_NEWS:API_GET_NEWS
 }
     
  
