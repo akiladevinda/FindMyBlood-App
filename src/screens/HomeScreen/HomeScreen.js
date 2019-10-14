@@ -23,14 +23,15 @@ import AddNewDoner from '../AddDoners/AddNewDoner';
 import DonationCamp from '../DonationCamp/DonationCamp';
 import NewsFeed from '../NewsFeed/NewsFeed';
 import AddRequests from '../EmgRequests/AddRequests';
+import API from '../../config/API';
 
 export default class HomeScreen extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            doners_count:'20',
-            requests_count:'10',
+            doners_count:'NaN',
+            requests_count:'NaN',
             menu_items: [
                 {id:1, title: "Add New Doners", image:Assets.HOME_ADDDONERS},
                 {id:2, title: "Create Donation Camp", image:Assets.HOME_CREATECAMP},
@@ -44,28 +45,61 @@ export default class HomeScreen extends Component {
 
     componentWillMount(){
         AsyncStorage.setItem('alreadyLaunched', JSON.stringify(true));
+        this.API_GetHomeScreenCounts();
+    }
+
+    //Refresh Screen
+    refreshScreen = () => {
+        this.API_GetHomeScreenCounts();
     }
 
     //Menu button click event 
     clickEventListener = (value) => {
 
         if(value.id == 1){
-            this.props.navigation.navigate("AddNewDoner",{screen:AddNewDoner})
+            this.props.navigation.navigate("AddNewDoner",{screen:AddNewDoner,onGoBack: () => this.refreshScreen(),})
         }else if(value.id == 2){
-            this.props.navigation.navigate("DonationCamp",{screen:DonationCamp})
+            this.props.navigation.navigate("DonationCamp",{screen:DonationCamp,onGoBack: () => this.refreshScreen(),})
         }else if(value.id == 3){
-            this.props.navigation.navigate("NewsFeed",{screen:NewsFeed})
+            this.props.navigation.navigate("NewsFeed",{screen:NewsFeed,onGoBack: () => this.refreshScreen(),})
         }else if(value == 'addemer'){
-            this.props.navigation.navigate("AddRequests",{screen:AddRequests})
+            this.props.navigation.navigate("AddRequests",{screen:AddRequests,onGoBack: () => this.refreshScreen(),})
         }
     
     
+    }
+
+    //APU Call Method for getting 
+    API_GetHomeScreenCounts = () => {
+
+        fetch(API.API_GET_COUNTS,{
+            method:'GET',
+            headers:{
+                'Content-Type': 'application/json',
+            },
+            })
+            .then((response) => response.json())
+            .then((responseText) => {
+                if(responseText.data[0].status_code == '200'){
+                    this.setState({
+                        doners_count:responseText.data[0].doners_count,
+                        requests_count:responseText.data[0].req_count
+                    })
+                    
+                }else{
+                    this.setState({doners_count:'NaN',requests_count:'NaN'})
+                }
+            })
+            .catch((error) => {
+                this.setState({doners_count:'NaN',requests_count:'NaN'})
+        });
     }
 
     render() {
         return (
             <View style={styles.container}>
             <ScrollView>
+            <View>
             <LinearGradient 
                 start={{x: 0, y: 0.5}} end={{x: 1, y: 0.1}} 
                 colors={['#500B0B', '#A81643', '#FF217A']}  
@@ -83,7 +117,7 @@ export default class HomeScreen extends Component {
                 </View>
                 
                 <View style={styles.headerInfo}>
-                <Text style={styles.headerInfoText}>{this.state.requests_count} Requests</Text>
+                <Text style={styles.headerInfoText}>{this.state.requests_count} New Requests</Text>
                 <View style={styles.headerInfoButtonConrainer}>
                 <TouchableOpacity style={styles.headerInfoButton} onPress={ ()=> alert('g')}>
                 <Text style={styles.headerInforButtonText}>VIEW ALL</Text>
@@ -98,6 +132,7 @@ export default class HomeScreen extends Component {
                 </View>
 
                 </LinearGradient>
+                </View>
 
                 <FlatList style={styles.list}
                 contentContainerStyle={styles.listContainer}

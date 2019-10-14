@@ -51,7 +51,8 @@ export default class NewsFeed extends Component {
 
     //Back Button Press Event
     backButtonOnPress = () => {
-        this.props.navigation.goBack();
+        this.props.navigation.state.params.onGoBack();
+        this.props.navigation.goBack(null);
         return true;
     }
 

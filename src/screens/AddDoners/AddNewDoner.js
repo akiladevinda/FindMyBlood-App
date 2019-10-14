@@ -70,13 +70,16 @@ export default class AddNewDoner extends Component {
 
     //On Press event for the back button 
     backButtonOnPress = () => {
-        this.props.navigation.goBack();
+        this.props.navigation.state.params.onGoBack();
+        this.props.navigation.goBack(null);
         return true;
     }
 
     //Home navigation
     navigateToHome = () => {
-        this.props.navigation.navigate("HomeScreen",{screen:HomeScreen})
+        this.props.navigation.state.params.onGoBack();
+        this.props.navigation.goBack(null);
+        return true;
     }
 
     //Date Picker handling methods
