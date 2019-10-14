@@ -16,6 +16,7 @@ import AddNewDoner from "../screens/AddDoners/AddNewDoner";
 import DonationCamp from "../screens/DonationCamp/DonationCamp";
 import NewsFeed from "../screens/NewsFeed/NewsFeed";
 import NewsFeedMore from "../screens/NewsFeed/NewsFeedMore";
+import AddRequests from "../screens/EmgRequests/AddRequests";
 
 //Creating Stack Navigator for All Routes in Application
 const AppNavigator = createStackNavigator({
@@ -79,6 +80,13 @@ const AppNavigator = createStackNavigator({
     },
     NewsFeedMore: {
           screen:NewsFeedMore,
+          navigationOptions: { 
+            header: null,  
+            gesturesEnabled: false 
+          },   
+      },
+    AddRequests: {
+          screen:AddRequests,
           navigationOptions: { 
             header: null,  
             gesturesEnabled: false 

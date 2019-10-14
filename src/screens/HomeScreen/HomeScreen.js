@@ -22,6 +22,7 @@ import AppStyles from '../../config/AppStyles';
 import AddNewDoner from '../AddDoners/AddNewDoner';
 import DonationCamp from '../DonationCamp/DonationCamp';
 import NewsFeed from '../NewsFeed/NewsFeed';
+import AddRequests from '../EmgRequests/AddRequests';
 
 export default class HomeScreen extends Component {
 
@@ -54,6 +55,8 @@ export default class HomeScreen extends Component {
             this.props.navigation.navigate("DonationCamp",{screen:DonationCamp})
         }else if(value.id == 3){
             this.props.navigation.navigate("NewsFeed",{screen:NewsFeed})
+        }else if(value == 'addemer'){
+            this.props.navigation.navigate("AddRequests",{screen:AddRequests})
         }
     
     
@@ -89,7 +92,7 @@ export default class HomeScreen extends Component {
                 </View>
 
                 <View style={styles.emeregencyReqContainer}>
-                <TouchableOpacity style={styles.emergencyReqButton} onPress={ ()=> alert('f')}>
+                <TouchableOpacity style={styles.emergencyReqButton} onPress={ ()=> this.clickEventListener('addemer') }>
                 <Text style={styles.emeergenctBtnText}>+ ADD EMERGENCY REQUEST</Text>
                 </TouchableOpacity>
                 </View>
