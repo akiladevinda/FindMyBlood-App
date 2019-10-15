@@ -21,6 +21,7 @@ const Assets = {
     IC_DATE:require('../assets/auth/date.png'),
     IC_GET_CALL:require('../assets/contact/call.png'),
     IC_GET_EMAIL:require('../assets/contact/email.png'),
+    IC_HEADER_SHARE:require('../assets/header/share.png'),
     HOME_ADDDONERS:require('../assets/home/add-doners.png'),
     HOME_CREATECAMP:require('../assets/home/create-camp.png'),
     HOME_NEWSFEED:require('../assets/home/news.png'),

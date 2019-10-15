@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
       },
       bottonCotainer: {
         flexDirection: 'row',
-        justifyContent:'center',
+        // justifyContent:'center',
     },
     buttonContainer:{
         height:50,

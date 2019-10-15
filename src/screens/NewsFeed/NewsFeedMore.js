@@ -19,6 +19,19 @@ import Metrics from '../../config/Metrics';
 import HeaderBackBtn from '../../components/Header/HeaderBackBtn';
 import AppStyles from '../../config/AppStyles';
 import Assets from '../../config/Assets';
+import Share from 'react-native-share';
+import HeaderWShare from '../../components/Header/HeaderWShare';
+
+
+// const shareOptions = {
+//     title: 'Share via',
+//     message: 'some message',
+//     url: 'some share url',
+//     social: Share.Social.WHATSAPP,
+//     whatsAppNumber: "9199999999", 
+//     filename: 'test' , 
+// };
+
 
 export default class NewsFeedMore extends Component {
 
@@ -54,8 +67,20 @@ export default class NewsFeedMore extends Component {
     contactReporter = (value) => {
         if(value == 'call'){
             Linking.openURL(`tel:${this.state.organizer_mobile}`)
-        }else{
+        }else if(value == 'email'){
             Linking.openURL('mailto:'+this.state.organizer_email)
+        }else{
+            const shareOptions = {
+                title: 'Share via',
+                message: this.state.event_title,
+                social: Share.Social.WHATSAPP,
+                social: Share.Social.FACEBOOK,
+                whatsAppNumber: '+9471'+this.state.organizer_mobile, 
+                showAppsToView:true
+            };
+            Share.open(shareOptions)
+            .then((res) => { console.log(res) })
+            .catch((err) => { err && console.log(err); });
         }
     }
 
@@ -69,7 +94,7 @@ export default class NewsFeedMore extends Component {
             colors={['#500B0B', '#A81643', '#FF217A']}   
             style={styles.headerView}>
 
-            <HeaderBackBtn title='News Feed' onPress={ () => this.backButtonOnPress()}/>
+            <HeaderWShare title='News Feed' onPress={ () => this.backButtonOnPress()} shareOnPress= {()=> this.contactReporter('share')}/>
 
             <Text style={styles.title}>{this.state.event_title}</Text>
 
